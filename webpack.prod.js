@@ -99,6 +99,7 @@ module.exports = {
         },
       ]
   }),
-  ]
+  ],
+  devtool: 'source-map' // 开启以后可以根据源码调试.
 
 }
