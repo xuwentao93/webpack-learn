@@ -5,15 +5,18 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin') // css指纹.
 const optimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin') // css压缩.
 const htmlWebpackPlugin = require('html-webpack-plugin') // html 压缩
+const CleanWebpackPlugin = require('clean-webpack-plugin') // 打包的时候清空output对应目录的文件
+const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin') // 配置每次都要加载的模块,
+// 如react, react-dom等.
 
 module.exports = {
-  entry:  __dirname + "/app/main.js", // 已多次提及的唯一入口文件
+  entry:  __dirname + "/app/main.js", // \入口文件
   output: {
     path: __dirname + "/dist", // 打包后的文件存放的地方
-    filename: "[name]_[hash:8].js" // 打包后输出文件的文件名
-    // filename: 'bundle.js'
+    // filename: "[name]_[hash:8].js" // 打包后输出文件的文件名
+    filename: 'bundle.js'
   },
-  // devtool: "source-map",
+  devtool: "source-map",
   devServer: {
     contentBase: './dist',
     port: 3333
@@ -22,7 +25,10 @@ module.exports = {
     rules: [
       {
         test: /(.js|.jsx)$/,
-        use: 'babel-loader'
+        use: [
+          'babel-loader',
+          'eslint-loader'
+        ]
       },
       {
         test: /.css$/,
@@ -65,9 +71,9 @@ module.exports = {
       cssProcessor: require('cssnano') // 依赖这个, 也要装.
     }),
     new htmlWebpackPlugin({
-      template: path.join(__dirname, './dist/index.html'),
+      template: path.join(__dirname, './app/index.html'), // 路径
       filename: 'index.html',
-      chunks: ['index'],
+      chunks: ['main'], // 那个js文件导入.
       inject: true,
       minify: {
         html5: true,
@@ -77,7 +83,22 @@ module.exports = {
         minifyJS: true,
         removeComments: false
       }
-    })
+    }),
+    new CleanWebpackPlugin(),
+    new HtmlWebpackExternalsPlugin({
+      externals: [
+        {
+          module: 'react',
+          entry: 'https://11.url.cn/now/lib/16.2.0/react.min.js',
+          global: 'React',
+        },
+        {
+          module: 'react-dom',
+          entry: 'https://11.url.cn/now/lib/16.2.0/react-dom.min.js',
+          global: 'ReactDOM',
+        },
+      ]
+  }),
   ]
 
 }
