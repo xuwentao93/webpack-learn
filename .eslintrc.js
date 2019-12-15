@@ -10,6 +10,9 @@ module.exports = {
     "comma-dangle": ["error", "never"], // 对象最后一个不要加逗号.
     "semi": ["error", "never"], // 不要分号
     "react/jsx-filename-extension": ["off"], // js中用jsx语法报错.
-    "import/extensions": ["off"] // import jsx 报错.
+    "import/extensions": ["off"], // import .jsx文件报错.
+    "no-console": ["off"],
+    "no-static-element-interactions": ["off"],
+    "click-events-have-key-events": ["off"]
   }
 }
