@@ -10,7 +10,7 @@ const webpackConfig = merge(webpackBase, {
     // filename: "[name]_[hash:8].js"
     filename: 'bundle.js'
   },
-  // devtool: "source-map",
+  devtool: 'source-map',
   devServer: {
     contentBase: './dist',
     port: 3333,
@@ -19,8 +19,7 @@ const webpackConfig = merge(webpackBase, {
   },
   mode: 'development',
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new FriendlyErrorsWebpackPlugin()
+    new webpack.HotModuleReplacementPlugin()
     // new MiniCssExtractPlugin({
     //   filename: `[name][]`
     // })

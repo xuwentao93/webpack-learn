@@ -1,6 +1,7 @@
-// const path = require('path')
+const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin') // css指纹.
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin') // 优化打包日志.
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin') // 缓存.
 
 module.exports = {
   // entry: path.join(__dirname, './app/main.js'), // 入口文件
@@ -12,7 +13,11 @@ module.exports = {
   // stats ohters value:
   // minimal(error or compile), none, normal(standard output), verbose(every time).
   resolve: {
-    extensions: ['.js', '.jsx']
+    alias: {
+      react: path.resolve(__dirname, './node_modules/react/umd/react.production.min.js'),
+      'react-dom': path.resolve(__dirname, './node_modules/react-dom/umd/react-dom.production.min.js')
+    },
+    extensions: ['.js', '.jsx'] // 引入此类型文件时, 省略文件后缀名.
   },
   devtool: 'source-map', // 开启以后可以根据源码调试.
   mode: 'production',
@@ -23,7 +28,8 @@ module.exports = {
         use: [
           'babel-loader',
           'eslint-loader'
-        ]
+        ],
+        exclude: path.join(__dirname, './node_modules')
       },
       {
         test: /.css$/,
@@ -59,6 +65,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name]_[contenthash:8].css'
     }),
-    new FriendlyErrorsWebpackPlugin()
+    new FriendlyErrorsWebpackPlugin(),
+    new HardSourceWebpackPlugin()
   ]
 }

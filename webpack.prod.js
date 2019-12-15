@@ -6,7 +6,7 @@ const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin') // �
 // 如react, react-dom等.
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin') // css压缩.
 const cssnano = require('cssnano') // OptimizeCssAssetsWebpackPlugin的依赖.
-
+const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin') // 各个模块加载的速度测试.
 const merge = require('webpack-merge')
 const webpackBase = require('./webpack.base.js')
 
@@ -55,7 +55,7 @@ const webpackConfig = merge(webpackBase, {
         }
       ]
     }),
-    new FriendlyErrorsWebpackPlugin()
+    new SpeedMeasureWebpackPlugin()
   ]
 })
 
