@@ -26,6 +26,12 @@ module.exports = {
       {
         test: /(.js|.jsx)$/,
         use: [
+          {
+            loader: 'thread-loader', // 多进程打包, 加快打包速度.
+            options: {
+              workers: 3
+            }
+          },
           'babel-loader',
           'eslint-loader'
         ],
@@ -59,7 +65,8 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: 'file-loader'
       }
-    ]
+    ],
+
   },
   plugins: [
     new MiniCssExtractPlugin({

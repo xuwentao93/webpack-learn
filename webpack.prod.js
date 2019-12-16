@@ -2,6 +2,7 @@ const webpack = require('webpack')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin') // html 压缩
 const CleanWebpackPlugin = require('clean-webpack-plugin') // 打包的时候清空output对应目录的文件
+const TerserPlugin = require('terser-webpack-plugin') // 并行压缩, 加快压缩速度.
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin') // 配置每次都要加载的模块,
 // 如react, react-dom等.
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin') // css压缩.
@@ -19,6 +20,13 @@ const webpackConfig = merge(webpackBase, {
   },
   stats: 'errors-only',
   mode: 'production',
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        parallel: true
+      })
+    ]
+  },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new OptimizeCssAssetsWebpackPlugin({
