@@ -34,4 +34,5 @@ class Hello extends React.PureComponent {
   }
 }
 
+// export default Hello
 module.exports = <Hello />

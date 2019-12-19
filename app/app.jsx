@@ -6,7 +6,7 @@ export default class extends React.PureComponent {
   render() {
     return (
       <div className="app">
-        <span>122</span>
+        <span>122222</span>
         <img src={logo} alt="logo show failed!" />
       </div>
     )
