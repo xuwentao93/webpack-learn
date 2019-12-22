@@ -3,6 +3,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin') // css指纹.
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin') // 优化打包日志.
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin') // 缓存.
 
+// Notice me! please use image-webpack-plugin to minify images' size.
+
 module.exports = {
   // entry: path.join(__dirname, './app/main.js'), // 入口文件
   // output: {
@@ -10,8 +12,6 @@ module.exports = {
   //   // filename: "[name]_[hash:8].js" // 打包后输出文件的文件名
   //   filename: 'bundle.js'
   // },
-  // stats ohters value:
-  // minimal(error or compile), none, normal(standard output), verbose(every time).
   resolve: {
     alias: {
       react: path.resolve(__dirname, './node_modules/react/umd/react.production.min.js'),
@@ -69,7 +69,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name]_[contenthash:8].css'
+      filename: './css/[name]_[contenthash:8].css' // css output file.
     }),
     new FriendlyErrorsWebpackPlugin(),
     new HardSourceWebpackPlugin()

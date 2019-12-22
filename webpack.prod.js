@@ -15,9 +15,11 @@ const webpackConfig = merge(webpackBase, {
   entry: path.join(__dirname, './app/main.js'), // 入口文件
   output: {
     path: path.join(__dirname, './dist'), // 打包后的文件存放的地方
-    // filename: "[name]_[hash:8].js" // 打包后输出文件的文件名
-    filename: 'bundle.js'
+    filename: './js/[name]_[hash:8].js' // 打包后输出文件的文件名
+    // filename: '/js/bundle.js'
   },
+  // stats ohters value:
+  // minimal(error or compile), none, normal(standard output), verbose(every time).
   stats: 'errors-only',
   mode: 'production',
   optimization: {
@@ -63,7 +65,11 @@ const webpackConfig = merge(webpackBase, {
         }
       ]
     }),
-    new SpeedMeasureWebpackPlugin()
+    new SpeedMeasureWebpackPlugin(),
+    new webpack.DllReferencePlugin({ // 引入这个插件, 将我们经常打包的东西引入进来, 优化项目体积和构建速度.
+      // eslint-disable-next-line global-require
+      manifest: require('./build/library/library.json')
+    })
   ]
 })
 

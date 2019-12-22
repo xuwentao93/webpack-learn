@@ -13,6 +13,7 @@ module.exports = {
     "import/extensions": ["off"], // import .jsx文件报错.
     "no-console": ["off"],
     "no-static-element-interactions": ["off"],
-    "click-events-have-key-events": ["off"]
+    "click-events-have-key-events": ["off"],
+    "import/no-extraneous-dependencies": ["off"]
   }
 }
