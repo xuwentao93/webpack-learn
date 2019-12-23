@@ -6,12 +6,6 @@ const HardSourceWebpackPlugin = require('hard-source-webpack-plugin') // 缓存.
 // Notice me! please use image-webpack-plugin to minify images' size.
 
 module.exports = {
-  // entry: path.join(__dirname, './app/main.js'), // 入口文件
-  // output: {
-  //   path: path.join(__dirname, './dist'), // 打包后的文件存放的地方
-  //   // filename: "[name]_[hash:8].js" // 打包后输出文件的文件名
-  //   filename: 'bundle.js'
-  // },
   resolve: {
     alias: {
       react: path.resolve(__dirname, './node_modules/react/umd/react.production.min.js'),

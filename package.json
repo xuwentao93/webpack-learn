@@ -5,10 +5,10 @@
   "main": "app/index.js",
   "scripts": {
     "test": "I don't know what this property means.",
-    "build": "webpack --config webpack.prod.js",
-    "dev": "webpack-dev-server --config webpack.dev.js",
-    "ssr": "webpack --config webpack.ssr.js",
-    "dll": "webpack --config webpack.dll.js"
+    "build": "webpack --config build/webpack.prod.js",
+    "dev": "webpack-dev-server --config build/webpack.dev.js",
+    "ssr": "webpack --config build/webpack.ssr.js",
+    "dll": "webpack --config build/webpack.dll.js"
   },
   "keywords": [
     "webpack",
